@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.0" DTDVERSION="2.0">
+  <MESSAGE ID="40" PROTOCOLVERSION="1.0">
+    <SIMPLEREQ>
+      <IMETHODCALL NAME="EnumerateInstances">
+        <LOCALNAMESPACEPATH>
+          <NAMESPACE NAME="Intelliflash" />
+        </LOCALNAMESPACEPATH>
+        <IPARAMVALUE NAME="ClassName">
+          <CLASSNAME NAME="CIM_StorageVolume" />
+        </IPARAMVALUE>
+        <IPARAMVALUE NAME="LocalOnly">
+          <VALUE>FALSE</VALUE>
+        </IPARAMVALUE>
+      </IMETHODCALL>
+    </SIMPLEREQ>
+  </MESSAGE>
+</CIM>

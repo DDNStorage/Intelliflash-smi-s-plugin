@@ -1,0 +1,32 @@
+#
+# Configuration file for dockerized cimserver instance 
+#
+cimserver:
+  properties: # map to describe cimserver start props
+    enableAuthentication: true
+    enableHttpsConnection: true    # enables SSL/TLS connection on 5989 port
+    sslBackwardCompatibility: true # should be enabled to provide secure connection from Windows SVCVMM
+#    enableNamespaceAuthorization: true
+#    logLevel: TRACE
+#    traceComponents: XmlIO
+#    traceLevel: 4 
+#    traceFacility: Log
+  cert:
+#    countryName: US # default value US
+#    stateOrProvinceName: California # default value California
+#    organizationName: DataDirect Networks, Inc # default value is 'DataDirect Networks, Inc'
+#    organizationalUnitName: OpenPegasus cimserver instance # default value 'OpenPegasus cimserver instance' 
+    commonName: 10.204.86.250 # IP or FQDN of the Cimserver certificate
+#    expiration: 365 # Certificate expiration in days, default value is 365
+#    privateKeyPath: <externalPrivateKeyPath>
+#    certificatePath: <externalCertificatePath>
+array:
+  endpoint: 10.204.86.24
+  user: admin
+  password: dA==
+  users:
+    - user: user1
+      password: dXNlcjE=
+      permissions:
+        - namespace: Intelliflash
+          rights: "RW"
