@@ -2,9 +2,9 @@
 
 ## Supported Intelliflash versions matrix
 
-|                                      | SMI-S version 1.0             |
+|  Docker version                      | SMI-S version 1.0             |
 | ------------------------------------ | ----------------------------- |
-| Docker version => 19.03              | Intelliflash version 3.11.0.4 |
+|  => 19.03                            | Intelliflash version 3.11.0.4 |
 
 ## How to configure SMIS server before container run
 
