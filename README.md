@@ -1,5 +1,11 @@
 # Dockerized SMIS server configuration and run
 
+## Supported Intelliflash versions matrix
+
+|                                      | Intelliflash version 3.11.0.4 |
+| ------------------------------------ | ----------------------------- |
+| Docker version => 19.03              | SMI-S version 1.0             |
+
 ## How to configure SMIS server before container run
 
 SMIS docker container should have configuration yaml file, by default it's `config.yaml` and should be mapped into `/etc/cimserver/config.yaml` inside the simserver container
