@@ -82,7 +82,7 @@ git clone https://github.com/DDNStorage/Intelliflash-smi-s-plugin /opt/Intellifl
 
 2. Untar image
 ```bash
-tar -zxvf /opt/Intelliflash-smi-s-plugin/bin/smis-server.tar.gz
+tar -zxvf /opt/Intelliflash-smi-s-plugin/bin/smis-server.tar.gz -C /opt/Intelliflash-smi-s-plugin/bin/
 ```
 
 3. Load image
@@ -93,7 +93,7 @@ docker load -i /opt/Intelliflash-smi-s-plugin/bin/smis-server.tar
 ## How to start SMIS container
 
 ```bash
-docker run -dit -p 5988:5988 -p 5989:5989 -v /root/repos/smi-s-pegasus/config:/etc/cimserver smis-server:1.0
+docker run -dit -p 5988:5988 -p 5989:5989 -v /opt/Intelliflash-smi-s-plugin/config:/etc/cimserver smis-server:1.0
 ```
 
 ## How to stop SMIS container
