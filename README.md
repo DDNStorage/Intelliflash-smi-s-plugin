@@ -2,15 +2,15 @@
 
 ## Supported Intelliflash versions matrix
 
-|  Docker version                      | SMI-S version 1.0             |
+|  Docker version                      | SMIS version 1.0             |
 | ------------------------------------ | ----------------------------- |
 |  => 19.03                            | Intelliflash version 3.11.0.4 |
 
-`Note:` If you use earlier Intelliflash version with activated SMI-S you should upgrade your array to use Dockerized SMI-S server and replace the old SMI-S provider with the new docker SMI-S provider connection.
+`Note:` If you use earlier Intelliflash version with activated SMIS you should upgrade your array to use Dockerized SMIS server and replace the old SMIS provider with the new docker SMIS provider connection.
 
 ## How to configure SMIS server before container run
 
-SMIS docker container should have configuration yaml file, by default it's `config.yaml` and should be mapped into `/etc/cimserver/config.yaml` inside the simserver container
+SMIS docker container should have configuration yaml file, by default it's `config.yaml` and should be mapped into `/etc/cimserver/config.yaml` inside the simserver container.
 
 ```yaml
 #
@@ -71,11 +71,11 @@ cimserver.cert.expiration            | cert    | false     | Self-signed certifi
 cimserver.cert.privateKeyPath        | cert    | false     | External private key file path. `certificatePath` must be specified too. It's container path, not host.
 cimserver.cert.certificatePath       | cert    | false     | External Certificate file path. `privateKeyPath`  must be specified too. It's container path, not host.
 
-`Note:` Provide any user's credentials when enableAuthentication=true option
+`Note:` Provide any user's credentials when enableAuthentication=true option.
 
 `Note:` If `privateKeyPath` and `certificatePath` specified then other `cert` options are omitted.
 
-`Note:` SMIS configuration example placed at `https://github.com/DDNStorage/Intelliflash-smi-s-plugin/blob/master/config/config.yaml`
+`Note:` SMIS configuration example placed at `https://github.com/DDNStorage/Intelliflash-smi-s-plugin/blob/master/config/config.yaml`.
 
 ## How to load SMIS container image
 
@@ -89,21 +89,40 @@ git clone https://github.com/DDNStorage/Intelliflash-smi-s-plugin /opt/Intellifl
 tar -zxvf /opt/Intelliflash-smi-s-plugin/bin/smis-server.tar.gz | xargs docker load -i
 ```
 
+## How to modify SMIS configuration file
+
+Before start SMIS provider, please prepare configuration file. E.g., in this manual we use /opt/Intelliflash-smi-s-plugin/config/config.yaml:
+```bash
+vim /opt/Intelliflash-smi-s-plugin/config/config.yaml
+```
+
+`Note:` For more information see "How to configure SMIS server before container run" chapter.
+
 ## How to start SMIS container
 
 ```bash
 docker run -dit -p 5988:5988 -p 5989:5989 -v /opt/Intelliflash-smi-s-plugin/config:/etc/cimserver smis-server:1.0
 ```
 
-`Note:` There should be a config.yaml file in /opt/Intelliflash-smi-s-plugin/config directory (see "How to configure SMIS server before container run" chapter). You can use existing config file example or create new one in vim or another editor.
+If you want to use individual IP address for SMIS container you can create static IP (e.g., 10.10.10.10) on your docker host and run container with modified options:
+
+```bash
+docker run -dit -p 10.10.10.10:5988:5988 -p 10.10.10.10:5989:5989 -v /opt/Intelliflash-smi-s-plugin/config:/etc/cimserver smis-server:1.0
+```
+
+## How to connect to SMIS provider
+
+To connect to the SMIS provider from SCVMM, use the IP/FQDN of the docker container (which defaults to docker host machine) and the ports that were specified in the docker run command.
 
 ## How to view logs
 
+In case of any issues during start container or in container work you can see logs for SMIS docker container. Here you can find information about connection errors, password problems, etc:
 ```bash
 docker ps | grep -i -m 1 smis-server | awk '{print $1}' | xargs docker logs
 ```
 
 ## How to stop SMIS container
+
 ```bash
 docker ps | grep -i -m 1 smis-server | awk '{print $1}' | xargs docker kill
 ```
